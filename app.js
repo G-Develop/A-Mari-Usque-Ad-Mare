@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = 3001;
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 app.get("/", function (req, res) {
@@ -20,6 +21,11 @@ app.get("/resources", function (req, res) {
 });
 
 
+app.post("/resources", function (req, res) {
+  res.send("post route is here")
+  //get data from the form and add to the resources array object
+  //then redirect back to the resources page
+});
 
 
 app.listen(PORT,'0.0.0.0', 'localhost', function () {

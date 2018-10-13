@@ -1,3 +1,4 @@
+<% include partials/header %>
 <h1> You have reached the resources.ejs page</h1>
 
 <% resources.forEach(function(resource) { %>
@@ -6,3 +7,5 @@
      <img src="<%= resource.image %>">
     </div>
 <% }); %>
+
+<% include partials/footer %>
