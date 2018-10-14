@@ -18,17 +18,19 @@ let resourceSchema = new mongoose.Schema({
 let Resource = mongoose.model("Resource", resourceSchema);
 
 
-Resource.create(
-  {
-    name: "seed name 1", image: "https://images.unsplash.com/photo-1533569346453-2d5258ffdd87?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b95cbe468180d680b04b0727f22738dc&auto=format&fit=crop&w=400&q=60"
-  }, function(err, resource) {
-    if (err){
-      console.log(err);
-    } else {
-      console.log("newly created Resource: ");
-      console.log(resource);
-    }
-  });
+/*
+  Resource.create(
+    {
+      name: "seed name 3", image: "https://images.unsplash.com/photo-1533557068012-cd53d5ecbb0f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d442568190b51943f4ba73d368f011b3&auto=format&fit=crop&w=400&q=60"
+    }, function(err, resource) {
+      if (err){
+        console.log(err);
+      } else {
+        console.log("newly created Resource: ");
+        console.log(resource);
+      }
+    });
+*/
 
 
 
@@ -51,7 +53,14 @@ app.get("/", function (req, res) {
 
 app.get("/resources", function (req, res) {
   console.log("user has hit the resources route");
-  res.render("resources", {resources:resources});
+  //get all resources from the DB
+  Resource.find({}, function (err, allResources){
+    if(err){
+      console.log(err);
+    } else {
+      res.render("resources", {resources:allResources});
+    }
+  });
 });
 
 
@@ -65,9 +74,14 @@ app.post("/resources", function (req, res) {
   let name = req.body.name;
   let image = req.body.image;
   let newResource = {name: name, image: image}
-  resources.push(newResource);
-  //then redirect back to the resources page
-  res.redirect("/resources");
+  //Create a new resource and save to DB
+  Resource.create(newResource, function(err, freshResource) {
+    if (err){
+      console.log(err);
+    } else {
+      res.redirect("/resources");
+    }
+  });
 });
 
 
