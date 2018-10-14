@@ -1,7 +1,5 @@
 <% include partials/header %>
 
-
-
 <div class="container">
   <header class = "jumbotron">
     <div class="container">
@@ -10,20 +8,19 @@
       <p> <a class="btn btn-primary btn-large" href="/resources/new">Add new resource</a> </p>
     </div>
   </header>
-
-
-    <div class="row text-center" style="display:flex; flex-wrap:wrap;">
-      <% resources.forEach(function(resource) { %>
-          <div class="col-md3 col-sm-6">
-            <div class="thumbnail">
-              <img src="<%= resource.image %>">
-            </div>
-            <div class="thumbnail">
-              <h5><%=resource.name%></h5>
-            </div>
+  
+  <div class="row text-center" style="display:flex; flex-wrap:wrap;">
+    <% resources.forEach(function(resource) { %>
+        <div class="col-md3 col-sm-6">
+          <div class="thumbnail">
+            <img src="<%= resource.image %>">
           </div>
-      <% }); %>
-    </div>
+          <div class="thumbnail">
+            <h5><%=resource.name%></h5>
+          </div>
+        </div>
+    <% }); %>
+  </div>
 </div>
 
 
