@@ -11,7 +11,7 @@ const seedDB = require("./mongoSeeds");
 mongoose.connect("mongodb://localhost/resources");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-//seedDB();
+//seedDB();  //uncomment to refresh and seed the database
 
 
 
