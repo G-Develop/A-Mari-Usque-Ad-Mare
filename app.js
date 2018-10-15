@@ -7,26 +7,10 @@ const Resource = require("./models/resource");
 const seedDB = require("./mongoSeeds");
 
 
-seedDB();
-
 mongoose.connect("mongodb://localhost/resources");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-
-
-/*
-  Resource.create(
-    {
-      name: "seed name 3", image: "https://images.unsplash.com/photo-1533557068012-cd53d5ecbb0f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d442568190b51943f4ba73d368f011b3&auto=format&fit=crop&w=400&q=60"
-    }, function(err, resource) {
-      if (err){
-        console.log(err);
-      } else {
-        console.log("newly created Resource: ");
-        console.log(resource);
-      }
-    });
-*/
+seedDB();
 
 
 
@@ -46,24 +30,20 @@ app.get("/", function (req, res) {
   res.render("landing");
 });
 
-
+//will now render the INDEX  page that will show an index of the resources 
 app.get("/resources", function (req, res) {
-  console.log("user has hit the resources route");
+  console.log("user has hit the index route");
   //get all resources from the DB
   Resource.find({}, function (err, allResources){
     if(err){
       console.log(err);
     } else {
-      res.render("resources", {resources:allResources});
+      res.render("index", {resources:allResources});
     }
   });
 });
 
-
-
-
-
-
+//CRUD CREATE via POST to /resources
 app.post("/resources", function (req, res) {
   //get data from the form and add to the resources array object
   console.log("user has hit the post route");
@@ -81,11 +61,39 @@ app.post("/resources", function (req, res) {
 });
 
 
-
+//Form that will help send the POST  to /resources 
 app.get("/resources/new", function (req, res) {
   console.log("user has hit the resources/new get  route");
   res.render("new.ejs");
 });
+
+
+
+// Displays info about each individual resource
+app.get("/resources/:id", function (req, res) {
+  // find resources with the :id 
+  Resource.findById(req.params.id).populate("comments").exec(function(err, foundResource){
+    if(err){
+      console.log(err);
+    } else {
+      // render the display ejs
+      res.render("display", {resource: foundResource});
+    }
+  });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
