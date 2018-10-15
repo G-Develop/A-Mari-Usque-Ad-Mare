@@ -83,6 +83,11 @@ app.get("/resources/:id", function (req, res) {
 
 });
 
+//======ROUTES FOR COMMENTS =======
+
+app.get("/resources/:id/comments/new", function (req, res) {
+  res.send("comments input form here will send a POST");
+});
 
 
 
