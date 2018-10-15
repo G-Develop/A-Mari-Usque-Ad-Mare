@@ -4,13 +4,14 @@ const PORT = 3001;
 const bodyParser  = require("body-parser");
 const mongoose  = require("mongoose");
 const Resource = require("./models/resource");
+const Comment  = require("./models/comment");
 const seedDB = require("./mongoSeeds");
 
 
 mongoose.connect("mongodb://localhost/resources");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-seedDB();
+//seedDB();
 
 
 
@@ -38,7 +39,7 @@ app.get("/resources", function (req, res) {
     if(err){
       console.log(err);
     } else {
-      res.render("index", {resources:allResources});
+      res.render("resources/index", {resources:allResources});
     }
   });
 });
@@ -61,10 +62,9 @@ app.post("/resources", function (req, res) {
 });
 
 
-//Form that will help send the POST  to /resources 
+//NEW Form that will help send the POST  to /resources 
 app.get("/resources/new", function (req, res) {
-  console.log("user has hit the resources/new get  route");
-  res.render("new.ejs");
+  res.render("resources/new");
 });
 
 
@@ -77,7 +77,7 @@ app.get("/resources/:id", function (req, res) {
       console.log(err);
     } else {
       // render the display ejs
-      res.render("display", {resource: foundResource});
+      res.render("resources/display", {resource: foundResource});
     }
   });
 
@@ -86,7 +86,39 @@ app.get("/resources/:id", function (req, res) {
 //======ROUTES FOR COMMENTS =======
 
 app.get("/resources/:id/comments/new", function (req, res) {
-  res.send("comments input form here will send a POST");
+  // find resource with the :id 
+  Resource.findById(req.params.id,function(err, resource){
+    if(err){
+      console.log(err);
+    } else {
+      // render the comments/new
+      res.render("comments/new", {resource: resource});
+    }
+  });
+
+});
+
+
+
+app.post("/resources/:id/comments", function (req, res) {
+  // query resource with the :id 
+  Resource.findById(req.params.id,function(err, resource){
+    if(err){
+      console.log(err);
+      res.redirect("/resources");
+    } else {
+      Comment.create(req.body.comment, function (err, comment) {
+       if(err){
+         console.log(err);
+       } else {
+         resource.comments.push(comment);
+         resource.save();
+         res.redirect("/resources/" + resource._id)
+       }
+      });
+    }
+  });
+
 });
 
 
