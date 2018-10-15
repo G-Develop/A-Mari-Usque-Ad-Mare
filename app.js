@@ -3,19 +3,15 @@ const app = express();
 const PORT = 3001;
 const bodyParser  = require("body-parser");
 const mongoose  = require("mongoose");
+const Resource = require("./models/resource");
+const seedDB = require("./mongoSeeds");
 
+
+seedDB();
 
 mongoose.connect("mongodb://localhost/resources");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-
-//===========SETTING UP THE SCHEMA FOR MONGO========
-let resourceSchema = new mongoose.Schema({
-  name: String,
-  image: String
-});
-
-let Resource = mongoose.model("Resource", resourceSchema);
 
 
 /*
@@ -35,7 +31,7 @@ let Resource = mongoose.model("Resource", resourceSchema);
 
 
 /*
-  // Resources sudo database
+  // Resources psudo database
   let resources = [
     {name: "seed name 1", image: "https://images.unsplash.com/photo-1533569346453-2d5258ffdd87?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b95cbe468180d680b04b0727f22738dc&auto=format&fit=crop&w=400&q=60"},
     {name: "seed name 2", image: " https://images.unsplash.com/photo-1533560954233-eaed97b72d1e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=943a4d6678b3d0f235cbf0b1ddfd30c0&auto=format&fit=crop&w=400&q=60"},
