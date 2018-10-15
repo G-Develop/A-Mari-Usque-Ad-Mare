@@ -1,5 +1,6 @@
-const mongoose  = require("mongoose");
+const mongoose = require("mongoose");
 const Resource = require("./models/resource");
+const Comment  = require("./models/comment");
 
 let data = [
   {
@@ -27,18 +28,32 @@ function seedDB(){
   console.log("removed resources!");
     //seed  the  resources here
     data.forEach(function(seed){
-      Resource.create(seed, function(err, data) {
+      Resource.create(seed, function(err, resource) {
         if(err) {
           console.log(err);
         } else {
           console.log("resource successfully added");
+          //add comments
+          Comment.create(
+            {
+             text:"ArchLinux with vim :D",
+             author:"Stallman"
+            }, function(err, comment) {
+              if(err) {
+                console.log(err);
+              }else {
+                resource.comments.push(comment);
+                resource.save();
+                console.log("new comment created");
+              }
+              
+            }
+          );
         }
         
       });
     });
-});
-  
-  //add comments
+  });
 }
 
 module.exports = seedDB;
