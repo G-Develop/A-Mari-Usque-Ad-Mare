@@ -169,9 +169,16 @@ app.post("/register", function (req, res) {
 });
 
 
+//display the login form 
+app.get("/login", function (req, res) {
+  res.render("login");
 
+});
 
-
+app.post("/login", passport.authenticate("local", {successRedirect: "/resources", failureRedirect: "/login" }),
+  function (req, res) {
+    
+  });
 
 
 
