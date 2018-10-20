@@ -10,3 +10,5 @@ Potential features
         6. also have a weather api as it is canada and you need to know what the weather is outside
         7. talk about canadian slangs 
         8. and canadian history
+
+
