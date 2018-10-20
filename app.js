@@ -31,6 +31,12 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  next();
+});
+
+
 
 
 
@@ -57,12 +63,13 @@ app.get("/", function (req, res) {
 //will now render the INDEX  page that will show an index of the resources 
 app.get("/resources", function (req, res) {
   console.log("user has hit the index route");
+  console.log(req.user);
   //get all resources from the DB
   Resource.find({}, function (err, allResources){
     if(err){
       console.log(err);
     } else {
-      res.render("resources/index", {resources:allResources});
+      res.render("resources/index", {resources:allResources, currentUser: req.user});
     }
   });
 });
@@ -108,7 +115,7 @@ app.get("/resources/:id", function (req, res) {
 
 //======ROUTES FOR COMMENTS ======= vim search tag: Rcomm
 
-app.get("/resources/:id/comments/new", function (req, res) {
+app.get("/resources/:id/comments/new", isLoggedIn,  function (req, res) {
   // find resource with the :id 
   Resource.findById(req.params.id,function(err, resource){
     if(err){
@@ -123,7 +130,7 @@ app.get("/resources/:id/comments/new", function (req, res) {
 
 
 
-app.post("/resources/:id/comments", function (req, res) {
+app.post("/resources/:id/comments", isLoggedIn, function (req, res) {
   // query resource with the :id 
   Resource.findById(req.params.id,function(err, resource){
     if(err){
@@ -182,9 +189,19 @@ app.post("/login", passport.authenticate("local", {successRedirect: "/resources"
 
 
 
+//logout 
+app.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("resources");
+});
 
-
-
+// check if user is logged in 
+function isLoggedIn(req, res, next) {
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect("/login");
+}
 
 
 
