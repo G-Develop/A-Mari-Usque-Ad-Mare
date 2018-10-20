@@ -3,15 +3,38 @@ const app = express();
 const PORT = 3001;
 const bodyParser  = require("body-parser");
 const mongoose  = require("mongoose");
+const passport  = require("passport");
+const LocalStrategy  = require("passport-local");
 const Resource = require("./models/resource");
 const Comment  = require("./models/comment");
+const User  = require("./models/user");
 const seedDB = require("./mongoSeeds");
 
 
 mongoose.connect("mongodb://localhost/resources");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-//seedDB();  //uncomment to refresh and seed the database
+app.use(express.static(__dirname + "/public"));
+seedDB();  //uncomment to refresh and seed the database
+
+
+//===ETC  FOR PASSPORT ========
+
+app.use(require("express-session")({
+  secret:"test secret info",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+
+
+
 
 
 
@@ -123,7 +146,21 @@ app.post("/resources/:id/comments", function (req, res) {
 
 
 
+//========PASSPORT ROUTES ===========
+// display the register form
 
+app.get("/resources/:id/comments/new", function (req, res) {
+  // find resource with the :id 
+  Resource.findById(req.params.id,function(err, resource){
+    if(err){
+      console.log(err);
+    } else {
+      // render the comments/new
+      res.render("comments/new", {resource: resource});
+    }
+  });
+
+});
 
 
 
