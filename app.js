@@ -15,7 +15,7 @@ mongoose.connect("mongodb://localhost/resources");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-seedDB();  //uncomment to refresh and seed the database
+//seedDB();  //uncomment to refresh and seed the database
 
 
 //===ETC  FOR PASSPORT ========
@@ -106,7 +106,7 @@ app.get("/resources/:id", function (req, res) {
 
 });
 
-//======ROUTES FOR COMMENTS =======
+//======ROUTES FOR COMMENTS ======= vim search tag: Rcomm
 
 app.get("/resources/:id/comments/new", function (req, res) {
   // find resource with the :id 
@@ -146,21 +146,30 @@ app.post("/resources/:id/comments", function (req, res) {
 
 
 
-//========PASSPORT ROUTES ===========
+//========PASSPORT ROUTES =========== vim search tag: Rpass
 // display the register form
 
-app.get("/resources/:id/comments/new", function (req, res) {
-  // find resource with the :id 
-  Resource.findById(req.params.id,function(err, resource){
-    if(err){
-      console.log(err);
-    } else {
-      // render the comments/new
-      res.render("comments/new", {resource: resource});
-    }
-  });
+app.get("/register", function (req, res) {
+  res.render("register");
 
 });
+
+//register post
+app.post("/register", function (req, res) {
+  let newUser = new User({username: req.body.username});
+  User.register(newUser, req.body.password,function (err,user) {
+    if(err) {
+      console.log(err);
+      return res.render("register")
+    }
+    passport.authenticate("local")(req, res, function () {
+      res.redirect("/resources");
+    });
+  }); 
+});
+
+
+
 
 
 
