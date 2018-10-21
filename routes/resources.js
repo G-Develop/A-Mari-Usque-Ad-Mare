@@ -62,6 +62,44 @@ router.get("/:id", function (req, res) {
 
 });
 
+//Edit RESOURCE form
+
+router.get("/:id/edit", function (req, res) {
+  Resource.findById(req.params.id, function (err, foundResource){
+    if(err){
+      res.redirect("/resources")
+    } else {
+       res.render("resources/edit",{resource: foundResource});
+    }
+  });
+});
+
+
+//Update  for edit RESOURCE form
+router.put("/:id", function(req,res) {
+  Resource.findByIdAndUpdate(req.params.id, req.body.resource, function (err, updatedResource) {
+   if(err){
+     res.redirect("/resources");
+   } else {
+     res.redirect("/resources/" + req.params.id);
+   }
+  });
+});
+
+//DESTORY RESOURCE ROUTE
+router.delete("/:id", function ( req, res) {
+  Resource.findByIdAndRemove(req.params.id, function(err) {
+    if(err) {
+      res.redirect("/resources");
+    } else {
+      res.redirect("/resources");
+    }
+  });
+});
+
+
+
+
 // check if user is logged in 
 function isLoggedIn(req, res, next) {
   if(req.isAuthenticated()){

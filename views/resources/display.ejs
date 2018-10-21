@@ -24,11 +24,16 @@
                 <img class="img-responsive" src="<%= resource.image %>">
                 <div class="caption-full">
                     <h4 class="pull-right">some cool info here</h4>
-                    <h4><a><%=resource.name%></a></h4>
+                    <h4><a><%=resource.name %></a></h4>
                     <p><%= resource.caption %></p>
                     <p> 
                      <strong>Post Owner:<%=resource.author.username %> </strong> 
                     </p>
+                    <a class="btn btn-xs btn-warning" href="/resources/<%= resource._id %>/edit">Edit</a>
+                    <form action="/resources/<%=resource._id %>?_method=DELETE" method="POST" id="delete-form">
+                      <button class = "btn btn-xs btn-danger" >Delete</button>
+                      
+                    </form>
                 </div>
             </div>
             <h2>Live Chat Bar</h2>

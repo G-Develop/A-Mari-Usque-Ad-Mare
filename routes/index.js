@@ -56,6 +56,7 @@ router.get("/logout", function (req, res) {
   res.redirect("resources");
 });
 
+
 // check if user is logged in 
 function isLoggedIn(req, res, next) {
   if(req.isAuthenticated()){
