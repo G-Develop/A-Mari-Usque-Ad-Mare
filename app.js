@@ -24,7 +24,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 // seedDB();  //uncomment to refresh and seed the database
 
- clearDB(); //uncomment to clear mongo database
+// clearDB(); //uncomment to clear mongo database
 
 //===ETC  FOR PASSPORT ========
 

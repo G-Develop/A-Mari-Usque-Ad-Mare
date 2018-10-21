@@ -5,6 +5,9 @@ const Comment  = require("../models/comment");
 const passport  = require("passport");
 const User  = require("../models/user");
 
+
+
+//Root 
 router.get("/", function (req, res) {
   console.log("user has hit the root route");
   res.render("landing");

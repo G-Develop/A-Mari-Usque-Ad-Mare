@@ -29,11 +29,12 @@
                     <p> 
                      <strong>Post Owner:<%=resource.author.username %> </strong> 
                     </p>
+                    <% if(currentUser && resource.author.id.equals(currentUser._id)){ %>
                     <a class="btn btn-xs btn-warning" href="/resources/<%= resource._id %>/edit">Edit</a>
                     <form action="/resources/<%=resource._id %>?_method=DELETE" method="POST" id="delete-form">
                       <button class = "btn btn-xs btn-danger" >Delete</button>
-                      
                     </form>
+                  <% } %>
                 </div>
             </div>
             <h2>Live Chat Bar</h2>
@@ -55,6 +56,13 @@
                             <p>
                                 <%= comment.text %> 
                             </p>
+                              <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" 
+                               href="/resources/<%=resource._id %>/comments/<%=comment._id %>/edit">Edit</a>
+                            <form id="delete-form" action="/resources/<%=resource._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                             <% } %>
                         </div>
                     </div>
                 <% }) %>
