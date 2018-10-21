@@ -25,9 +25,11 @@
                 <div class="caption-full">
                     <h4 class="pull-right">some cool info here</h4>
                     <h4><a><%=resource.name%></a></h4>
-                    <p><%= resource.description %></p>
+                    <p><%= resource.caption %></p>
+                    <p> 
+                     <strong>Post Owner:<%=resource.author.username %> </strong> 
+                    </p>
                 </div>
-
             </div>
             <h2>Live Chat Bar</h2>
     <input name="user" placeholder="Your Name (Optional)" />

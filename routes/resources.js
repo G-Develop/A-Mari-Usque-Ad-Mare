@@ -24,7 +24,12 @@ router.post("/",isLoggedIn, function (req, res) {
   console.log("user has hit the post route");
   let name = req.body.name;
   let image = req.body.image;
-  let newResource = {name: name, image: image}
+  let caption = req.body.caption;
+  let author = {
+    id: req.user._id,
+    username: req.user.username
+  }
+  let newResource = {name: name, image: image, caption: caption, author: author}
   //Create a new resource and save to DB
   Resource.create(newResource, function(err, freshResource) {
     if (err){
