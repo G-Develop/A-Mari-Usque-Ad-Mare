@@ -9,6 +9,7 @@ const Resource = require("./models/resource");
 const Comment  = require("./models/comment");
 const User  = require("./models/user");
 const seedDB = require("./mongoSeeds");
+const clearDB  = require("./mongoUnseed");
 //refactored routes
 const commentRoutes  = require("./routes/comments");
 const resourceRoutes = require("./routes/resources");
@@ -19,8 +20,9 @@ mongoose.connect("mongodb://localhost/resources");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-//seedDB();  //uncomment to refresh and seed the database
+// seedDB();  //uncomment to refresh and seed the database
 
+// clearDB(); //uncomment to clear mongo database
 
 //===ETC  FOR PASSPORT ========
 

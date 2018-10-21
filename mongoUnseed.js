@@ -20,41 +20,41 @@ let data = [
   }
 ]
 
-function seedDB(){ 
+function clearDB(){ 
   Resource.remove({}, function(err) { 
-    if (err){
-    console.log(err); 
-  } 
-  console.log("removed resources!");
-    //seed  the  resources here
-    data.foreach(function(seed){
-      resource.create(seed, function(err, resource) {
-        if(err) {
-          console.log(err);
-        } else {
-          console.log("resource successfully added");
-          //add comments
-          comment.create(
-            {
-             text:"archlinux with vim :d",
-             author:"stallman"
-            }, function(err, comment) {
-              if(err) {
-                console.log(err);
-              }else {
-                resource.comments.push(comment);
-                resource.save();
-                console.log("new comment created");
-              }
+    //if (err){
+    //console.log(err); 
+  //} 
+  //console.log("removed resources!");
+    ////seed  the  resources here
+    //data.forEach(function(seed){
+      //Resource.create(seed, function(err, resource) {
+        //if(err) {
+          //console.log(err);
+        //} else {
+          //console.log("resource successfully added");
+          ////add comments
+          //Comment.create(
+            //{
+             //text:"ArchLinux with vim :D",
+             //author:"Stallman"
+            //}, function(err, comment) {
+              //if(err) {
+                //console.log(err);
+              //}else {
+                //resource.comments.push(comment);
+                //resource.save();
+                //console.log("new comment created");
+              //}
               
-            }
-          );
-        }
+            //}
+          //);
+        //}
         
-      });
-    });
+      //});
+    //});
   });
 }
 
-module.exports = seedDB;
+module.exports = clearDB;
 

@@ -19,7 +19,7 @@ router.get("/", function (req, res) {
 });
 
 //CRUD CREATE via POST to /resources
-router.post("/", function (req, res) {
+router.post("/",isLoggedIn, function (req, res) {
   //get data from the form and add to the resources array object
   console.log("user has hit the post route");
   let name = req.body.name;
@@ -37,7 +37,7 @@ router.post("/", function (req, res) {
 
 
 //NEW Form that will help send the POST  to /resources 
-router.get("/new", function (req, res) {
+router.get("/new", isLoggedIn,  function (req, res) {
   res.render("resources/new");
 });
 
@@ -56,6 +56,14 @@ router.get("/:id", function (req, res) {
   });
 
 });
+
+// check if user is logged in 
+function isLoggedIn(req, res, next) {
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect("/login");
+}
 
 module.exports = router;
 

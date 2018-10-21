@@ -31,8 +31,12 @@ router.post("/", isLoggedIn, function (req, res) {
        if(err){
          console.log(err);
        } else {
+         comment.author.id = req.user._id;   //ading id to the comment
+         comment.author.username = req.user.username; //ading username to the comment
+         comment.save();  //saving comment
          resource.comments.push(comment);
          resource.save();
+         console.log(comment);
          res.redirect("/resources/" + resource._id)
        }
       });
