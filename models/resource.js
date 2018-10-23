@@ -4,7 +4,14 @@ const mongoose  = require("mongoose");
 let resourceSchema = new mongoose.Schema({
   name: String,
   image: String,
-  description: String,
+  caption: String,
+  author: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    username: String
+  },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,

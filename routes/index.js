@@ -5,6 +5,9 @@ const Comment  = require("../models/comment");
 const passport  = require("passport");
 const User  = require("../models/user");
 
+
+
+//Root 
 router.get("/", function (req, res) {
   console.log("user has hit the root route");
   res.render("landing");
@@ -55,6 +58,7 @@ router.get("/logout", function (req, res) {
   req.logout();
   res.redirect("resources");
 });
+
 
 // check if user is logged in 
 function isLoggedIn(req, res, next) {

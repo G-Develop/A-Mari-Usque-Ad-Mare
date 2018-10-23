@@ -6,17 +6,17 @@ let data = [
   {
     name: "seed name 1", 
     image: "https://images.unsplash.com/photo-1533569346453-2d5258ffdd87?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b95cbe468180d680b04b0727f22738dc&auto=format&fit=crop&w=400&q=60",
-    description: "lorem ipsum"
+    caption: "lorem ipsum"
   },
   {
     name: "seed name 2", 
     image: "https://images.unsplash.com/photo-1533569346453-2d5258ffdd87?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b95cbe468180d680b04b0727f22738dc&auto=format&fit=crop&w=400&q=60",
-    description: "GNU plus linux"
+    caption: "GNU plus linux"
   },
   {
     name: "seed name 3", 
     image: "https://images.unsplash.com/photo-1533569346453-2d5258ffdd87?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b95cbe468180d680b04b0727f22738dc&auto=format&fit=crop&w=400&q=60",
-    description: "hello world"
+    caption: "hello world"
   }
 ]
 
@@ -27,17 +27,17 @@ function seedDB(){
   } 
   console.log("removed resources!");
     //seed  the  resources here
-    data.forEach(function(seed){
-      Resource.create(seed, function(err, resource) {
+    data.foreach(function(seed){
+      resource.create(seed, function(err, resource) {
         if(err) {
           console.log(err);
         } else {
           console.log("resource successfully added");
           //add comments
-          Comment.create(
+          comment.create(
             {
-             text:"ArchLinux with vim :D",
-             author:"Stallman"
+             text:"archlinux with vim :d",
+             author:"stallman"
             }, function(err, comment) {
               if(err) {
                 console.log(err);

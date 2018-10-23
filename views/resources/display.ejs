@@ -24,10 +24,18 @@
                 <img class="img-responsive" src="<%= resource.image %>">
                 <div class="caption-full">
                     <h4 class="pull-right">some cool info here</h4>
-                    <h4><a><%=resource.name%></a></h4>
-                    <p><%= resource.description %></p>
+                    <h4><a><%=resource.name %></a></h4>
+                    <p><%= resource.caption %></p>
+                    <p> 
+                     <strong>Post Owner:<%=resource.author.username %> </strong> 
+                    </p>
+                    <% if(currentUser && resource.author.id.equals(currentUser._id)){ %>
+                    <a class="btn btn-xs btn-warning" href="/resources/<%= resource._id %>/edit">Edit</a>
+                    <form action="/resources/<%=resource._id %>?_method=DELETE" method="POST" id="delete-form">
+                      <button class = "btn btn-xs btn-danger" >Delete</button>
+                    </form>
+                  <% } %>
                 </div>
-
             </div>
             <h2>Live Chat Bar</h2>
     <input name="user" placeholder="Your Name (Optional)" />
@@ -43,11 +51,18 @@
                 <% resource.comments.forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-md-12">
-                            <strong><%= comment.author %></strong>
+                            <strong><%= comment.author.username %></strong>
                             <span class="pull-right">Jan 2019</span>
                             <p>
                                 <%= comment.text %> 
                             </p>
+                              <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" 
+                               href="/resources/<%=resource._id %>/comments/<%=comment._id %>/edit">Edit</a>
+                            <form id="delete-form" action="/resources/<%=resource._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                             <% } %>
                         </div>
                     </div>
                 <% }) %>
