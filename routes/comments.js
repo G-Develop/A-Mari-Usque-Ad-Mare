@@ -32,6 +32,7 @@ router.post("/", middleware.isLoggedIn, function (req, res) {
     } else {
       Comment.create(req.body.comment, function (err, comment) {
        if(err){
+         req.flash("error", "sorry please try again")
          console.log(err);
        } else {
          comment.author.id = req.user._id;   //ading id to the comment
@@ -40,6 +41,7 @@ router.post("/", middleware.isLoggedIn, function (req, res) {
          resource.comments.push(comment);
          resource.save();
          console.log(comment);
+         req.flash("sucess", "Comment added")
          res.redirect("/resources/" + resource._id);
        }
       });

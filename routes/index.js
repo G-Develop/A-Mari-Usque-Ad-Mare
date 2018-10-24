@@ -1,7 +1,5 @@
 const express  = require("express");
-const router  = express.Router({mergeParams:true});
-const Resource = require("../models/resource");
-const Comment  = require("../models/comment");
+const router  = express.Router();
 const passport  = require("passport");
 const User  = require("../models/user");
 
@@ -31,9 +29,11 @@ router.post("/register", function (req, res) {
   User.register(newUser, req.body.password,function (err,user) {
     if(err) {
       console.log(err);
+      req.flash("error, err.message")
       return res.render("register")
     }
     passport.authenticate("local")(req, res, function () {
+      req.flash("success", user.username + "is Logged in")
       res.redirect("/resources");
     });
   }); 
@@ -56,17 +56,11 @@ router.post("/login", passport.authenticate("local", {successRedirect: "/resourc
 //logout 
 router.get("/logout", function (req, res) {
   req.logout();
+  req.flash("success", "Logged out!")
   res.redirect("resources");
 });
 
 
-// check if user is logged in 
-function isLoggedIn(req, res, next) {
-  if(req.isAuthenticated()){
-    return next();
-  }
-  res.redirect("/login");
-}
 
 
 module.exports = router;
