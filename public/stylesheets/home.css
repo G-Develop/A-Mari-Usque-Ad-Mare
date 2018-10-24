@@ -1,0 +1,82 @@
+body {
+  background-color: #000;
+}
+
+#home-header {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 40vh;
+}
+
+#nav-bar{
+  z-index:1;
+
+}
+
+#home-header h1 {
+  color: #fff;
+}
+
+.slideshow { 
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slideshow li { 
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  animation: picAnimation 50s linear infinite; 
+}
+
+.slideshow li:nth-child(1) { 
+  background-image: url(https://assets1.sportsnet.ca/wp-content/uploads/2017/11/Bailey-1040x572.jpg)
+}
+.slideshow li:nth-child(2) { 
+  background-image: url(https://tce-live2.s3.amazonaws.com/media/media/95878d01-d5fa-4ee5-b2a4-24d37723a566.jpg);
+  animation-delay: 15s; 
+}
+.slideshow li:nth-child(3) { 
+  background-image: url(http://www.aal-europe.eu/wp-content/uploads/2015/12/Canada_flag_halifax_9_-04.jpg)
+  animation-delay: 22s; 
+}
+.slideshow li:nth-child(4) { 
+  background-image: url(https://tradeind.gov.tt/wp-content/uploads/2017/10/6eb4b1a8ed68214ae7a4c86692674e4d_XL.jpg);
+  animation-delay: 32s; 
+}
+.slideshow li:nth-child(5) { 
+  background-image: url(https://caricom.org/images/uploads/images/13609/west_indies_cricket_board_flag.png);
+  animation-delay: 43s; 
+}
+
+@keyframes picAnimation { 
+  0% { 
+    opacity: 0; 
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1
+  }
+  30% {
+    opacity: 0
+  }
+}
