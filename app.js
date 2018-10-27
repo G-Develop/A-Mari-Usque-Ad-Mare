@@ -4,6 +4,7 @@ const PORT = 3001;
 const bodyParser  = require("body-parser");
 const mongoose  = require("mongoose");
 const passport  = require("passport");
+const flash   = require("connect-flash");
 const LocalStrategy  = require("passport-local");
 const methodOverride = require("method-override");
 const Resource = require("./models/resource");
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+app.use(flash());
 // seedDB();  //uncomment to refresh and seed the database
 
 // clearDB(); //uncomment to clear mongo database
@@ -41,6 +43,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
+  res.locals.error= req.flash("error"); //remember need  to export to header via the template variables
+  res.locals.success = req.flash("sucess");
   next();
 });
 

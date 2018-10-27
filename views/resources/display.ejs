@@ -2,22 +2,6 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            <p class="lead">From Sea to Sea Live Chat</p>
-            <div class="list-group">
-                <li class="list-group-item ">Bob: Nice picture I want to immigrate </li>
-                <li class="list-group-item">Buju: Bob is not an easy road</li>
-                <li class="list-group-item ">Vybez: Dog I cah get a visa for up there </li>
-                <li class="list-group-item ">Buju: Hard luck there Vybz i know how it is</li>
-                <li class="list-group-item ">Movadoo: Haha It good for you I have my visa long time! Gully!!</li>
-                <li class="list-group-item ">Bob: you guys need to chill Don't you know the herb is now accepted in Canada?'</li>
-                <li class="list-group-item ">Buju: for real Don?!</li>
-                <li class="list-group-item ">Bob: you dun know!</li>
-                <li class="list-group-item ">Vybez: ok barber I haffa agree you a lucky man</li>
-                <li class="list-group-item ">Mavadoo: Clouds man Clouds</li>
-                <li class="list-group-item ">John Lennon: Lucy and Diamonds...</li>
-                <li class="list-group-item active">Tupac: it's time for change :D </li>
-            </div>
         </div>
         <div class="col-md-9">
             <div class="thumbnail">
@@ -37,15 +21,11 @@
                   <% } %>
                 </div>
             </div>
-            <h2>Live Chat Bar</h2>
-    <input name="user" placeholder="Your Name (Optional)" />
-    <div class="container row">
-      <textarea placeholder="Type a message and hit ENTER" name="textarea" id="" rows="2" cols="80"></textarea>
-
     </div>
             <div class="well">
                 <div class="text-right">
                     <a class="btn btn-success" href="/resources/<%= resource._id %>/comments/new">Add New Comment</a>
+                    <a class="btn btn-success">Join event</a>
                 </div>
                 <hr>
                 <% resource.comments.forEach(function(comment){ %>
