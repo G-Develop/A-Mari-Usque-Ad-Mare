@@ -5,7 +5,7 @@ let middlewareObj = {};
 
 middlewareObj.checkResourceOwnership = function(req, res, next) {
  if(req.isAuthenticated()){
-        Resource.findById(req.params.id, function(err, foundResource){
+        resource.findById(req.params.id, function(err, foundResource){
            if(err){
             req.flash("error", "Resource could not be located")
             res.redirect("back");
