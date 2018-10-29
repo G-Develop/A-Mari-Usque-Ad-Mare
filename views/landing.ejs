@@ -11,10 +11,17 @@
       </head>
       <body>
           <nav class="navbar navbar-default" id ="nav-bar">
-            <div class="container-fluid">
-              <div class="navbar-header">
+      <header class="clearfix nav-bar2">
+    <div class="container">
+			<div class="header-left">
                 <a class="navbar-brand" href="/">From Sea to Sea </a>
-              </div>
+			</div>
+			<div class="header-right">
+				<label for="open">
+					<span class="hidden-desktop"></span>
+				</label>
+				<input type="checkbox" name="" id="open">
+				<nav>
               <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                  <%     if(!currentUser) {    %> 
@@ -24,12 +31,23 @@
                   <a href = #><li>Welcome  <%=currentUser.username %></a></li>
                   <li><a href="/logout">Logout</a></li>
                  <% }  %>
-                  <!--<li><a href="/">weather: -4c</a></li>-->
-                  <!--<li><a href="/">ttc bus (1):<em>5 mins away</em></a></li>-->
-                  <!--<li><a href="/">TTC BUS (2): 7:30pm</a></li>-->
                 </ul>
               </div>
-            </div>
+				</nav>
+			</div>
+		</div>
+	</header>
+<section class="clearfix nav-bar2">
+		<div class="container">
+			<div class="section-left">
+				<h1 class="section-title">A Mari Usque Ad Mare</h1>
+				<h5 class="section-tagline">Helping you enjoy the adventure that is Canada</h5>
+			</div>
+			<div class="section-right">
+			</div>
+		</div>
+	</section>
+            <div class="container-fluid">
           </nav>
           
           <div class="container">
@@ -48,17 +66,10 @@
 
 <div id="home-header">
     <h1>A Mari Usque Ad Mare </h1>
-    <p>Helping you enjoy the adventure that is Canada</p>
-    <a class = "btn btn-lg btn-success" href = "/resources">  Events</a>
-    <button type="button" class = "btn btn-lg btn-secondary" >Transport</button>
-    <button type="button" class = "btn btn-lg btn-secondary" >Housing</button>
-    <button type="button" class = "btn btn-lg btn-secondary" >Jobs</button>
-    <button type="button" class = "btn btn-lg btn-secondary" >Food</button>
-    <br />
-    <br />
-    <br />
-    <br />
-    <input type="" name="" id="" value="" />
+    <a class = "btn btn-blue" href = "/resources">  Events</a>
+    <a class = "btn btn-blue" >Jobs</a>
+    <a class = "btn btn-blue" >Food</a>
+    <a class = "btn btn-blue" >Forum</a>
 </div>
 
   <ul class="slideshow">
