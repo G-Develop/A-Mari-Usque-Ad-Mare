@@ -24,8 +24,14 @@
     </div>
             <div class="well">
                 <div class="text-right">
-                    <a class="btn btn-success" href="/resources/<%= resource._id %>/comments/new">Add New Comment</a>
-                    <a class="btn btn-success">Join event</a>
+                    <a class="btn btn-blue" href="/resources/<%= resource._id %>/comments/new">Add New Comment</a>
+                    <a 
+                       class = "btn btn-blue" 
+                       target = "popup" 
+                       onclick="window.open('http://localhost:3000', 'name', 'width=600, height =400')"
+                       >Forum
+                    
+                    </a>
                 </div>
                 <hr>
                 <% resource.comments.forEach(function(comment){ %>
