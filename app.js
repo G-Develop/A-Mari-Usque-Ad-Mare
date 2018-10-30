@@ -24,7 +24,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-// seedDB();  //uncomment to refresh and seed the database
+seedDB();  // uncomment to refresh and seed the database
 
 // clearDB(); //uncomment to clear mongo database
 
