@@ -58,36 +58,57 @@
             </div>
         </div>
     </div>
+    <!--<script>-->
+  <!--function initMap() {-->
+    <!--var lat = <%= resource.lat %>;-->
+    <!--var lng = <%= resource.lng %>;-->
+    <!--var center = {lat: lat, lng: lng };-->
+    <!--var map = new google.maps.Map(document.getElementById('map'), {-->
+        <!--zoom: 8,-->
+        <!--center: center,-->
+        <!--scrollwheel: false-->
+    <!--});-->
+    <!--var contentString = `-->
+      <!--<strong><%= resource.name %><br />-->
+      <!--<%= resource.location %></strong>-->
+      <!--<p><%= resource.description %></p>-->
+    <!--`-->
+    <!--var infowindow = new google.maps.InfoWindow({-->
+      <!--content: contentString-->
+    <!--});-->
+    <!--var marker = new google.maps.Marker({-->
+        <!--position: center,-->
+        <!--map: map-->
+    <!--});-->
+    <!--marker.addListener('click', function() {-->
+      <!--infowindow.open(map, marker);-->
+    <!--});-->
+  <!--}-->
+<!--</script>-->
+<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCwgFV6g8t6RXBjhV9M7Rd-oKMAfMV4AHM&callback=initMap"></script>-->
+
     <script>
-  function initMap() {
-    var lat = <%= resource.lat %>;
-    var lng = <%= resource.lng %>;
-    var center = {lat: lat, lng: lng };
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8,
-        center: center,
-        scrollwheel: false
-    });
-    var contentString = `
-      <strong><%= resource.name %><br />
-      <%= resource.location %></strong>
-      <p><%= resource.description %></p>
-    `
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-    var marker = new google.maps.Marker({
-        position: center,
-        map: map
-    });
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-  }
-</script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=API-KEY-HERE&callback=initMap"></script>
-
-
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: -25.344, lng: 131.036};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwgFV6g8t6RXBjhV9M7Rd-oKMAfMV4AHM&callback=initMap">
+    </script>
+  </body>
+</html>
 
 
 </div>
