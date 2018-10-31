@@ -7,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser:'Anonymous',
+      currentUser:'Lorenzo',
       messages: [],
       activeConnections:0
     };
@@ -52,7 +52,7 @@ class App extends Component {
     if(this.state.currentUser !== user) {
       const notificationObj = {
         type: "postNotification",
-        content: `${this.state.currentUser} changed their name to ${user}`,
+        //content: `${this.state.currentUser} changed their name to ${user}`,
         /*userName:user*/
       }
       this.socket.send(JSON.stringify(notificationObj));
