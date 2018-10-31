@@ -5,9 +5,9 @@ let resourceSchema = new mongoose.Schema({
   name: String,
   image: String,
   caption: String,
-  location: String,
-  lat: Number,
-  lng: Number,
+  //location: String,
+  //lat: Number,
+  //lng: Number,
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
